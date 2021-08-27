@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyTester", "ProxyTester.csproj", "{5F3C0BB4-EE4D-46C4-82F7-A432A34492B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F3C0BB4-EE4D-46C4-82F7-A432A34492B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F3C0BB4-EE4D-46C4-82F7-A432A34492B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F3C0BB4-EE4D-46C4-82F7-A432A34492B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F3C0BB4-EE4D-46C4-82F7-A432A34492B8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0A0349B9-21A7-4D77-9E3E-3B50A194A337}
+	EndGlobalSection
+EndGlobal
