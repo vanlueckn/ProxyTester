@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.IO;
+using System.Threading;
 
 namespace ProxyTester
 {
@@ -22,13 +23,29 @@ namespace ProxyTester
     /// </summary>
     public partial class MainWindow : Window
     {
-        private OpenFileDialog openFileDialog;
-        private String[] proxyList;
+        private OpenFileDialog _openFileDialog;
+        private List<string> _proxyStringList;
+        private readonly List<Proxy.Proxy> _proxyList;
         public MainWindow()
         {
             InitializeComponent();
-            this.openFileDialog = new OpenFileDialog();
-            this.openFileDialog.Title = "Please choose proxy file";
+            _openFileDialog = new OpenFileDialog();
+            _openFileDialog.Title = "Please choose proxy file";
+            _proxyList = new List<Proxy.Proxy>();
+
+            System.Timers.Timer aTimer = new System.Timers.Timer();
+
+            aTimer.Interval = 1000;
+            aTimer.Elapsed += OnTimedEvent;
+            aTimer.AutoReset = true;
+            aTimer.Enabled = true;
+        }
+        private void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
+        {
+            Application.Current.Dispatcher.BeginInvoke(new Action(delegate ()
+            {
+                Queue.Content = ThreadPool.PendingWorkItemCount;
+            }));
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -38,9 +55,38 @@ namespace ProxyTester
 
         async private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (this.openFileDialog.ShowDialog() is true)
-                this.proxyList = await File.ReadAllLinesAsync(this.openFileDialog.FileName);
-            
+            if (_openFileDialog.ShowDialog() is true)
+                _proxyStringList = new List<string>(await File.ReadAllLinesAsync(_openFileDialog.FileName));
+
+            using(new Helpers.WaitCursor())
+            {
+                foreach (string _proxy in _proxyStringList)
+                {
+                    try
+                    {
+                        _proxyList.Add(new Proxy.Proxy(_proxy, ProxyList, Application.Current.Dispatcher));
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex is FormatException || ex is Proxy.InvalidProxyException)
+                            continue;
+                        throw new Exception("Unknown error");
+                    }
+
+                }
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            _proxyList.Clear();
+            _proxyStringList.Clear();
+            ProxyList.Items.Clear();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            _proxyList.ForEach(prox => prox.Run());
         }
     }
 }

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Windows.Controls;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace ProxyTester.Proxy
 {
@@ -16,19 +18,40 @@ namespace ProxyTester.Proxy
         public string Pass;
         public bool Ready = false;
         public bool Success = false;
-        private ProxyItem _proxyItem;
+        public ProxyItem ProxyItem;
+        private ListView _listView;
+        private int _id = -2;
+        private Dispatcher _dispatcher;
 
-        public Proxy(string proxyString)
+        public Proxy(string proxyString, ListView listView, Dispatcher dispatcher)
         {
             _proxyString = proxyString;
+            _listView = listView;
+            _dispatcher = dispatcher;
+
             Parse();
             GenerateRow();
         }
 
         private void GenerateRow()
         {
-            _proxyItem = new ProxyItem { IP = Host, Port = Port.ToString(), User = User, Pass = Pass, Status = "pending", Speed = ""};
+            ProxyItem = new ProxyItem { IP = Host, Port = Port.ToString(), User = User, Pass = Pass, Status = "pending", Speed = ""};
+            _id = _listView.Items.Add(ProxyItem);
+        }
 
+        public void UpdateRow()
+        {
+            _listView.Items[_id] = ProxyItem;
+        }
+
+        public void UpdateRowThreadSafe()
+        {
+            if (_id < 0 || ProxyItem is null) return;
+          
+            _dispatcher.BeginInvoke(new Action(delegate ()
+            {
+                UpdateRow();
+            }));
         }
 
         private bool Validate()
@@ -49,6 +72,18 @@ namespace ProxyTester.Proxy
             User = splittedProxy[2];
             Pass = splittedProxy[3];
 
+        }
+
+        public void Run()
+        {
+            ProxyThread proxyThread = new ProxyThread(this, "http://techkings.de");
+            
+            ThreadPool.SetMaxThreads(10, 10);
+
+            ProxyItem.Status = "testing";
+            UpdateRow();
+
+            ThreadPool.QueueUserWorkItem(proxyThread.Start);
         }
     }
 }

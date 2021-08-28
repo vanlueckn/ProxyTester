@@ -10,13 +10,12 @@
         <Label Content="Destination URL" HorizontalAlignment="Center" Margin="0,187,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="24" FontWeight="Bold"/>
         <Image x:Name="Logo" HorizontalAlignment="Center" Margin="0,36,0,0" VerticalAlignment="Top" Source="/proxylogo.png" Height="120" Width="160" />
         <TextBox HorizontalAlignment="Center" VerticalContentAlignment="Center" Margin="0,240,0,0" Text="https://google.de" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Width="540" FontFamily="Microsoft JhengHei UI" FontSize="20" Height="38"/>
-        <ListView HorizontalAlignment="Center" Width="842" Margin="0,300,0,132" SelectionChanged="ListView_SelectionChanged">
+        <ListView HorizontalAlignment="Center" Width="842" Margin="0,300,0,132" SelectionChanged="ListView_SelectionChanged" Name="ProxyList">
             <ListView.View>
-                <GridView AllowsColumnReorder="true"
-                  ColumnHeaderToolTip="Employee Information">
+                <GridView AllowsColumnReorder="true">
                     <GridViewColumn DisplayMemberBinding=
                               "{Binding Path=IP}" 
-                          Header="IP" Width="200"/>
+                          Header="IP" Width="180"/>
 
                     <GridViewColumn DisplayMemberBinding=
                               "{Binding Path=Port}" 
@@ -24,19 +23,19 @@
 
                     <GridViewColumn DisplayMemberBinding=
                               "{Binding Path=User}" 
-                          Header="User" Width="200"/>
+                          Header="User" Width="150"/>
 
                     <GridViewColumn DisplayMemberBinding=
                               "{Binding Path=Pass}" 
-                          Header="Pass" Width="200"/>
+                          Header="Pass" Width="210"/>
 
                     <GridViewColumn DisplayMemberBinding=
                               "{Binding Path=Status}" 
-                          Header="Status" Width="141"/>
+                          Header="Status" Width="100"/>
 
                     <GridViewColumn DisplayMemberBinding=
                               "{Binding Path=Speed}" 
-                          Header="Speed" Width="100"/>
+                          Header="Speed" Width="102"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -49,9 +48,10 @@
                 <ColumnDefinition Width="25*"/>
             </Grid.ColumnDefinitions>
             <Button Content="Import" Grid.Row="0" Grid.Column="0" Margin="0,0,10,0" FontSize="16" FontWeight="Bold" Click="Button_Click"/>
-            <Button Content="Test" Grid.Row="0" Grid.Column="1" Margin="10,0,10,0" FontSize="16" FontWeight="Bold"/>
-            <Button Content="Clear" Grid.Row="0" Grid.Column="2" Margin="10,0,10,0" FontSize="16" FontWeight="Bold"/>
+            <Button Content="Test" Grid.Row="0" Grid.Column="1" Margin="10,0,10,0" FontSize="16" FontWeight="Bold" Click="Button_Click_2"/>
+            <Button Content="Clear" Grid.Row="0" Grid.Column="2" Margin="10,0,10,0" FontSize="16" FontWeight="Bold" Click="Button_Click_1"/>
             <Button Content="Export Working" Grid.Row="0" Grid.Column="3" Margin="10,0,0,0" FontSize="16" FontWeight="Bold"/>
         </Grid>
+        <Label Name="Queue" Content="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="89,96,0,0" FontSize="16" FontWeight="Bold"/>
     </Grid>
 </Window>

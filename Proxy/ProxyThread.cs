@@ -20,8 +20,9 @@ namespace ProxyTester.Proxy
             _url = new Uri(url);
         }
 
-        public void Start()
+        public void Start(Object state)
         {
+
             HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(_url);
 
             WebProxy webProxy = new WebProxy(_url, false, new string[0], new NetworkCredential(_proxy.User, _proxy.Pass));
@@ -31,14 +32,14 @@ namespace ProxyTester.Proxy
             try
             {
                 WebResponse webResponse = httpWebRequest.GetResponse();
-                _proxy.Success = true;
+                _proxy.ProxyItem.Status = "failed";
             }
             catch (WebException)
             {
-                _proxy.Success = false;
+                _proxy.ProxyItem.Status = "success";
             }
 
-            _proxy.Ready = true;
+            _proxy.UpdateRowThreadSafe();
         }
 
     }
