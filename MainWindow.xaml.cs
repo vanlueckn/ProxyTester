@@ -24,6 +24,7 @@ namespace ProxyTester
     public partial class MainWindow : Window
     {
         private OpenFileDialog _openFileDialog;
+        private SaveFileDialog _saveFileDialog;
         private List<string> _proxyStringList;
         private readonly List<Proxy.Proxy> _proxyList;
         public MainWindow()
@@ -31,6 +32,10 @@ namespace ProxyTester
             InitializeComponent();
             _openFileDialog = new OpenFileDialog();
             _openFileDialog.Title = "Please choose proxy file";
+            _saveFileDialog = new SaveFileDialog();
+            _saveFileDialog.Title = "Export working proxies";
+            _saveFileDialog.DefaultExt = ".txt";
+
             _proxyList = new List<Proxy.Proxy>();
 
             System.Timers.Timer aTimer = new System.Timers.Timer();
@@ -87,6 +92,24 @@ namespace ProxyTester
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             _proxyList.ForEach(prox => prox.Run(Destination.Text));
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            List<string> exportFileLines = new List<string>();
+
+            if (_saveFileDialog.ShowDialog() is false)
+                return;
+
+            _proxyList.ForEach(prox =>
+            {
+
+                if (! (prox.ProxyItem.Status == "success")) return;
+                Console.WriteLine(prox.ProxyItem.IP + ":" + prox.ProxyItem.Port.ToString() + ":" + prox.ProxyItem.User + ":" + prox.ProxyItem.Pass);
+                exportFileLines.Add(prox.ProxyItem.IP + ":" + prox.ProxyItem.Port.ToString() + ":" + prox.ProxyItem.User + ":" + prox.ProxyItem.Pass);
+            });
+
+            File.WriteAllLinesAsync(_saveFileDialog.FileName, exportFileLines);
         }
     }
 }
