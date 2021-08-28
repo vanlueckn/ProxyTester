@@ -61,4 +61,4 @@ Project Link: [https://github.com/vanlueckn/ProxyTester](https://github.com/vanl
 [issues-shield]: https://img.shields.io/github/issues/vanlueckn/ProxyTester.svg?style=for-the-badge
 [issues-url]: https://github.com/vanlueckn/ProxyTester/issues
 [license-shield]: https://img.shields.io/github/license/vanlueckn/ProxyTester.svg?style=for-the-badge
-[license-url]: https://github.com/vanlueckn/ProxyTester/blob/master/LICENSE.txt
+[license-url]: https://github.com/vanlueckn/ProxyTester/blob/master/LICENSE
