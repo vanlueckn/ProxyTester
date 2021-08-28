@@ -6,10 +6,15 @@
     <UseWPF>true</UseWPF>
     <ApplicationIcon>tscheschicon.ico</ApplicationIcon>
     <Authors>Nils van Lück</Authors>
-    <PackageLicenseExpression>GNU General Public License</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT License</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/vanlueckn/ProxyTester</PackageProjectUrl>
     <RepositoryUrl>https://github.com/vanlueckn/ProxyTester</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>
