@@ -74,9 +74,9 @@ namespace ProxyTester.Proxy
 
         }
 
-        public void Run()
+        public void Run(string destination)
         {
-            ProxyThread proxyThread = new ProxyThread(this, "http://techkings.de");
+            ProxyThread proxyThread = new ProxyThread(this, destination);
             
             ThreadPool.SetMaxThreads(10, 10);
 

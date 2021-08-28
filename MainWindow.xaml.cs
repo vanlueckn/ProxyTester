@@ -86,7 +86,7 @@ namespace ProxyTester
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            _proxyList.ForEach(prox => prox.Run());
+            _proxyList.ForEach(prox => prox.Run(Destination.Text));
         }
     }
 }

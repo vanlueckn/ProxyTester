@@ -9,7 +9,7 @@
     <Grid Height="649" VerticalAlignment="Top">
         <Label Content="Destination URL" HorizontalAlignment="Center" Margin="0,187,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="24" FontWeight="Bold"/>
         <Image x:Name="Logo" HorizontalAlignment="Center" Margin="0,36,0,0" VerticalAlignment="Top" Source="/proxylogo.png" Height="120" Width="160" />
-        <TextBox HorizontalAlignment="Center" VerticalContentAlignment="Center" Margin="0,240,0,0" Text="https://google.de" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Width="540" FontFamily="Microsoft JhengHei UI" FontSize="20" Height="38"/>
+        <TextBox Name="Destination" HorizontalAlignment="Center" VerticalContentAlignment="Center" Margin="0,240,0,0" Text="http://google.de" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Width="540" FontFamily="Microsoft JhengHei UI" FontSize="20" Height="38"/>
         <ListView HorizontalAlignment="Center" Width="842" Margin="0,300,0,132" SelectionChanged="ListView_SelectionChanged" Name="ProxyList">
             <ListView.View>
                 <GridView AllowsColumnReorder="true">
