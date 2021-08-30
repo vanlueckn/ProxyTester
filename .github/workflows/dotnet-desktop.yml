@@ -80,9 +80,9 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
     - name: Build x64
-      run: dotnet build --configuration Release --no-restore -r win10-x64 ProxyTester.csproj 
+      run: dotnet build --configuration Release --no-restore -r win10-x64 --self-contained true ProxyTester.csproj 
     - name: Build x86
-      run: dotnet build --configuration Release --no-restore -r win10-x86 ProxyTester.csproj
+      run: dotnet build --configuration Release --no-restore -r win10-x86 --self-contained true ProxyTester.csproj
     - uses: actions/upload-artifact@v2
       with:
         name: my-artifact
