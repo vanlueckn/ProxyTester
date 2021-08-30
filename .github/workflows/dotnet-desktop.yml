@@ -36,7 +36,7 @@
 # For a complete CI/CD sample to get started with GitHub Action workflows for Desktop Applications,
 # refer to https://github.com/microsoft/github-actions-for-desktop-apps
 
-name: .NET Core Desktop
+name: .NET Core Deploy
 
 on:
   push:
@@ -83,5 +83,11 @@ jobs:
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
       env:
         Configuration: ${{ matrix.configuration }}
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
+    - name: Build x64
+      run: dotnet build --configuration Release --no-restore -r win10-x64
+    - name: Build x86
+      run: dotnet build --configuration Release --no-restore -r win10-x86
+    - uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: bin/Release/net5.0-windows/PoxyTester.exe
