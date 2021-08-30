@@ -5,7 +5,7 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-
+[![.NET Core Desktop](https://github.com/vanlueckn/ProxyTester/actions/workflows/dotnet-desktop.yml/badge.svg?branch=master&event=push)](https://github.com/vanlueckn/ProxyTester/actions/workflows/dotnet-desktop.yml)
 # ProxyTester - Open Source Proxy Testing Tool
 ProxyTester is a testing tool for http proxies. The software is written in C# and uses the .NET 5.0 framework. 
 
