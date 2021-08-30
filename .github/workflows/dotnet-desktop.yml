@@ -83,15 +83,11 @@ jobs:
       run: dotnet publish --configuration Release --no-restore -r win10-x64 --self-contained true ProxyTester.csproj 
     - name: Build x86
       run: dotnet publish --configuration Release --no-restore -r win10-x86 --self-contained true ProxyTester.csproj
-    - name: zip win artifact
-      run: powershell Compress-Archive -Path D:\a\ProxyTester\ProxyTester\bin\Release\net5.0-windows\win10-x64\publish -DestinationPath win10-x64.zip 
-    - name: zip win artifact 2
-      run: powershell Compress-Archive -Path D:\a\ProxyTester\ProxyTester\bin\Release\net5.0-windows\win10-x86\publish -DestinationPath win10-x86.zip 
     - uses: actions/upload-artifact@v2
       with:
         name: win10-x64.zip 
-        path: win10-x64.zip 
+        path: D:\a\ProxyTester\ProxyTester\bin\Release\net5.0-windows\win10-x64\ProxyTester.dll
     - uses: actions/upload-artifact@v2
       with:
         name: win10-x86.zip 
-        path: win10-x86.zip 
+        path:  D:\a\ProxyTester\ProxyTester\bin\Release\net5.0-windows\win10-x86\ProxyTester.dll
