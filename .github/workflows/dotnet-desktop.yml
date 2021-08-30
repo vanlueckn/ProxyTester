@@ -50,7 +50,7 @@ jobs:
 
     strategy:
       matrix:
-        configuration: [Debug, Release]
+        configuration: [Release]
 
     runs-on: windows-latest  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -84,11 +84,9 @@ jobs:
     - name: Build x86
       run: dotnet publish --configuration Release --no-restore -r win10-x86 --self-contained true ProxyTester.csproj
     - name: zip win artifact
-      run: |
-       powershell Compress-Archive -Path D:\a\ProxyTester\ProxyTester\bin\Release\net5.0-windows\win10-x64\publish -DestinationPath win10-x64.zip 
+      run: powershell Compress-Archive -Path D:\a\ProxyTester\ProxyTester\bin\Release\net5.0-windows\win10-x64\publish -DestinationPath win10-x64.zip 
     - name: zip win artifact 2
-      run: |
-        powershell Compress-Archive -Path D:\a\ProxyTester\ProxyTester\bin\Release\net5.0-windows\win10-x86\publish -DestinationPath win10-x86.zip 
+      run: powershell Compress-Archive -Path D:\a\ProxyTester\ProxyTester\bin\Release\net5.0-windows\win10-x86\publish -DestinationPath win10-x86.zip 
     - uses: actions/upload-artifact@v2
       with:
         name: win10-x64.zip 
